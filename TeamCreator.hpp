@@ -14,18 +14,18 @@ public:
     int gold;
     int hp;
     
-    int getStrength() {
+    virtual int getStrength() {
         int total = 0;
         for(int i=0; i<v.size(); ++i)
             total += v[i]->getStrength();
         return total;
     }
     
-    void addUnit(Unit* p) {
+    virtual void addUnit(Unit* p) {
         v.push_back(p);
     }
     
-    void info(){
+    virtual void info(){
         cout << "Attack = " << attack << endl;
         cout << "Gold = " << gold << endl;
         cout << "wood = " << wood << endl;
@@ -37,11 +37,11 @@ public:
         }
     }
     
-    void SetAttack(){
+    virtual void SetAttack(){
         attack = getStrength();
     }
     
-    void MakeCreep(string name){
+    virtual void MakeCreep(string name){
         if (name == "Golem" && wood > 10){
             wood-=10;
             addUnit(new Golem);
@@ -52,7 +52,7 @@ public:
         }
     }
     
-    bool Farm(){
+    virtual bool Farm(){
         wood += 1;
         gold += 10;
         dist += 5;
@@ -60,7 +60,7 @@ public:
         return true;
     }
     
-    bool Follow(){   // returns true if we can follow enemy
+    virtual bool Follow(){   // returns true if we can follow enemy
         if (dist > 10){
             dist -= 10;
             return true;
@@ -69,7 +69,7 @@ public:
             return false;
     }
     
-    bool Retreat(){
+    virtual bool Retreat(){
         if (dist > 10){
             dist -= 10;
             return true;
@@ -78,7 +78,7 @@ public:
             return false;
     }
     
-    bool Attack(){
+    virtual bool Attack(){
         if (attack >= 10){
             attack -= 10;
             return true;
@@ -87,7 +87,7 @@ public:
             return false;
     }
     
-    void add(string name){
+    virtual void add(string name){
         if (name == "Golem")
             addUnit(new Golem);
         if (name == "Sven")
@@ -96,6 +96,68 @@ public:
             addUnit(new Juggernaut);
         if (name == "Centaur")
             addUnit(new Centaur);
+    }
+};
+
+
+// proxy example
+class TeamProxy : public Team{
+public:
+    Team* inner;
+    
+    
+    TeamProxy(Team* t){
+        inner = t;
+    }
+    
+    virtual int getStrength() {
+        cout << "method getStrength called" << endl;
+        return inner->getStrength();
+    }
+    
+    virtual void addUnit(Unit* p) {
+        cout << "method addUnit called" << endl;
+        inner->addUnit(p);
+    }
+    
+    virtual void info(){
+        cout << "method info called" << endl;
+        inner->info();
+    }
+    
+    virtual void SetAttack(){
+        cout << "method SetAttack called" << endl;
+        return inner->SetAttack();
+    }
+    
+    virtual void MakeCreep(string name){
+        cout << "method MakeCreep called" << endl;
+        inner->MakeCreep(name);
+    }
+    
+    virtual bool Farm(){
+        cout << "method Farm called" << endl;
+        return inner->Farm();
+    }
+    
+    virtual bool Follow(){   // returns true if we can follow enemy
+        cout << "method Follow called" << endl;
+        return inner->Follow();
+    }
+    
+    virtual bool Retreat(){
+        cout << "method Retreat called" << endl;
+        return inner->Retreat();
+    }
+    
+    virtual bool Attack(){
+        cout << "method Attack called" << endl;
+        return inner->Attack();
+    }
+    
+    virtual void add(string name){
+        cout << "method add called" << endl;
+        inner->add(name);
     }
 };
 

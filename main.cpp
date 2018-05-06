@@ -93,6 +93,5 @@ int main(){
         cout << "RadiantWin" << endl;
     else
         cout << "DireWin" << endl;
-    
     return 0;
 }
