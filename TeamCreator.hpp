@@ -1,6 +1,7 @@
 #pragma once
 #include "AbstractUnits.hpp"
 #include "ConcreteUnits.hpp"
+#include "Observer.hpp"
 #include <vector>
 
 using namespace std;
@@ -13,6 +14,7 @@ public:
     int wood;
     int gold;
     int hp;
+    Subject* StrategyUpdater;
     
     virtual int getStrength() {
         int total = 0;
@@ -160,4 +162,5 @@ public:
         inner->add(name);
     }
 };
+
 

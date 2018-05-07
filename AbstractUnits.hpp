@@ -6,6 +6,7 @@ class Unit {
 public:
     int healthPoints;
     int damage;
+    int strategy;
     virtual void info() {};
     virtual int getStrength() = 0;
     virtual void addUnit(Unit* p) {
