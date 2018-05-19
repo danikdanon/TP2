@@ -8,6 +8,7 @@ using namespace std;
 class wrapper : public Hero {
 public:
     Hero* inner;
+    wrapper* next;
     wrapper(Hero* hero){
         inner = hero;
     }
@@ -21,6 +22,7 @@ public:
     NecronomiconBuff(Hero* hero) : wrapper(hero) {};
     void useBuff(){
         wrapper::useBuff();
+        wrapper::mana-=20;
         cout << "Necro called" << endl;
     }
 };
@@ -30,7 +32,19 @@ public:
     AttackBuff(Hero* hero) : wrapper(hero) {};
     void useBuff(){
         wrapper::useBuff();
+        wrapper::mana-=10;
         cout << "AttackBuffed" << endl;
+    }
+};
+
+class Base : public wrapper{
+    void useBuffs(){
+        while (inner->mana >= 20){
+            inner = new NecronomiconBuff( inner );
+        }
+        while (mana >= 10){
+            inner = new AttackBuff ( inner );
+        }
     }
 };
 

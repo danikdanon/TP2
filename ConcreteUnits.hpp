@@ -27,10 +27,10 @@ public:
 };
 
 class Sven : public Hero{     // герой Sven
+public:
     std::string skill1 = "Stormhammer";
     std::string skill2 = "Rage";
-    
-public:
+
     Sven() {
         healthPoints = 650;
         damage = 70;

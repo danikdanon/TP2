@@ -14,7 +14,6 @@ public:
     int wood;
     int gold;
     int hp;
-    Subject* StrategyUpdater;
     
     virtual int getStrength() {
         int total = 0;
@@ -160,6 +159,19 @@ public:
     virtual void add(string name){
         cout << "method add called" << endl;
         inner->add(name);
+    }
+};
+
+class LandDefenders{
+public:
+    Subject army;
+    
+    void addUnit( Unit* p ){
+        army.add(new UnitObserver(p));
+    }
+    
+    void StrategyUpdate(int strategy){
+     //   army.SetValue(strategy);   не работает почему-то
     }
 };
 

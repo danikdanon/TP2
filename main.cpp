@@ -37,7 +37,7 @@ void DoAction(string action,Team &team, Team &oppositeTeam, int& dist){
 
 
 int main(){
-    int countOfMoves = 5;// количество ходов
+    /*int countOfMoves = 5;// количество ходов
     string RadiantHero;
     string DireHero;
     Team radiant;
@@ -92,6 +92,8 @@ int main(){
     if (radiant.hp > dire.hp)
         cout << "RadiantWin" << endl;
     else
-        cout << "DireWin" << endl;
-    return 0;
+        cout << "DireWin" << endl;*/
+    auto h1 = new NecronomiconBuff( new Sven );
+    h1->useBuff();
+    cout << h1->mana << endl;
 }
